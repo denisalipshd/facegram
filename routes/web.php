@@ -33,7 +33,7 @@ Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
 
 // follow
 Route::post('/follow', [FollowController::class, 'store'])->name('follow.store');
-Route::post('/follow/{id}', [FollowController::class, 'destroy'])->name('follow.destroy');
+Route::delete('/follow/{id}', [FollowController::class, 'destroy'])->name('follow.destroy');
 
 
 

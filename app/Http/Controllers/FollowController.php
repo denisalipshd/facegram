@@ -13,6 +13,7 @@ class FollowController extends Controller
         $request->validate([
             'following_id' => 'required|exists:users,id'
         ]);
+        
 
         $existing = Follow::where('follower_id', Auth::id())
             ->where('following_id', $request->following_id)
@@ -22,7 +23,7 @@ class FollowController extends Controller
             Follow::create([
                 'follower_id' => Auth::id(),
                 'following_id' => $request->following_id,
-                'is_accepted' => false,
+                'is_accepted' => true,
             ]);
         }
         

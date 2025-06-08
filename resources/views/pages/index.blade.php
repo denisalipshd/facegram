@@ -10,14 +10,24 @@
 
     <!-- Sidebar Kiri -->
     <div class="col-lg-3 d-none d-lg-block">
-      <div class="card sidebar-card">
+      <div class="card sidebar-card mb-2">
         <div class="card-body text-center">
-          <img src="assets/profile.jpg" alt="Profil" class="profile-img mb-2">
-          <h5 class="card-title">John Doe</h5>
-          <p class="text-muted">@johndoe</p>
-          <a href="#" class="btn btn-sm btn-outline-primary">Lihat Profil</a>
+          <img src="{{ $user->photo ? asset('storage/' . $user->photo) : asset('assets/default-user.png') }}" alt="Profil" class="profile-img mb-2">
+          <h5 class="card-title">{{ $user->full_name }}</h5>
+          <p class="text-muted">{{ $user->username }}</p>
+          <a href="{{ route('users.show', $user->id) }}" class="btn btn-sm btn-outline-primary">Lihat Profil</a>
+        </div>
+        </div>
+        @foreach ($followings as $follow)
+        <div class="card sidebar-card mb-2">
+          <div class="card-body text-center">
+            <img src="{{ $follow->following->photo ? asset('storage/' . $follow->following->photo) : asset('assets/default-user.png') }}" alt="Profil" class="profile-img mb-2">
+            <h5 class="card-title">{{ $follow->following->full_name }}</h5>
+            <p class="text-muted">{{ $follow->following->username }}</p>
+            <a href="{{ route('users.show', $follow->following->id) }}" class="btn btn-sm btn-outline-primary">Lihat Profil</a>
         </div>
       </div>
+        @endforeach
     </div>
 
     <!-- Feed Tengah -->

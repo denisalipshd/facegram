@@ -20,8 +20,13 @@ class FaceController extends Controller
             ->whereNotIn('id', $followingIds)
             ->take(5)
             ->get();
+
+        $followings = $user->followings()
+            ->where('is_accepted', true)
+            ->with('following')
+            ->get();
          
-        return view('pages.index', compact('posts', 'user', 'suggestedUsers'));
+        return view('pages.index', compact('posts', 'user', 'suggestedUsers', 'followings'));
     }
 
     public function show()
